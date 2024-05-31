@@ -1,10 +1,8 @@
 import "./weatherInfo.css";
 const API_KEY = "a54e8173e89a01136c32d57287b49764";
-
 export default function WeatherInfo(Info) {
   const weatherCardsDiv = document.querySelector(".weather-cards");
   const currentWeatherDiv = document.querySelector(".current-weather");
-
   const createWeatherCard = (cityName, weatherItem, ind) => {
     if (ind === 0) {
       return ` <div class="details">
@@ -42,10 +40,8 @@ export default function WeatherInfo(Info) {
     `;
     }
   };
-
   const getWeatherDetails = (cityName, lat, lon, city) => {
     const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-
     fetch(WEATHER_API_URL)
       .then((res) => res.json())
       .then((data) => {
@@ -58,12 +54,10 @@ export default function WeatherInfo(Info) {
             return uniqueForecastDays.push(forecastDATE);
           }
         });
-
         //to clear prev input
         city.city[0] = "";
         weatherCardsDiv.innerHTML = "";
         currentWeatherDiv.innerHTML = "";
-
         
         fiveDayForecast.map((weatherItem, ind) => {
           if (ind === 0) {
@@ -88,7 +82,6 @@ export default function WeatherInfo(Info) {
         console.log(err);
       });
   };
-
   const getCityCoordinates = (city) => {
     let cityName;
     let flag = false;
@@ -120,7 +113,6 @@ export default function WeatherInfo(Info) {
         }
       });
   };
-
   return (
     <div className="weather-data">
       <div>
@@ -130,7 +122,6 @@ export default function WeatherInfo(Info) {
           <h3></h3>
         )}
       </div>
-
       {console.log("LOC---->", getCityCoordinates(Info))}
       {console.log("hey", { Info })}
       <div className="current-weather">
