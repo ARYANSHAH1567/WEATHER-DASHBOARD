@@ -14,6 +14,9 @@ export default function WeatherInfo(Info) {
         )} &deg;C</h4>
         <h4>Wind : ${weatherItem.wind.speed} M/S</h4>
         <h4>Humidity : ${weatherItem.main.humidity}%</h4>
+        <h4>Feels Like:${(weatherItem.main.feels_like - 273.15).toFixed(
+          2
+        )} &deg;C</h4>
       </div>
       <div className="icon">
       <img src="https://openweathermap.org/img/wn/${
@@ -41,7 +44,7 @@ export default function WeatherInfo(Info) {
   };
 
   const getWeatherDetails = (cityName, lat, lon, city) => {
-    const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+    const WEATHER_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
 
     fetch(WEATHER_API_URL)
       .then((res) => res.json())
@@ -96,7 +99,7 @@ export default function WeatherInfo(Info) {
       flag = false;
     }
     console.log("cityName-->", cityName);
-    const GEOCODING_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
+    const GEOCODING_API_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
     fetch(GEOCODING_API_URL)
       .then((res) => res.json())
       .then((data) => {
